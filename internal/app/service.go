@@ -1,7 +1,7 @@
 package app
 
 import (
-	counter_shard "awesomeProject/internal/app/shard"
+	redisClient "awesomeProject/internal/redis"
 	"context"
 	"os"
 	"os/signal"
@@ -17,7 +17,7 @@ func Run(ctx context.Context, cfg *config.Config) error {
 	ctx, cancel := context.WithCancel(ctx)
 
 	s := transport.New(cfg)
-	c := counter_shard.New()
+	c := redisClient.New("localhost:6379")
 	h := handlers.New(cfg, c)
 
 	go s.Start(ctx, h)
