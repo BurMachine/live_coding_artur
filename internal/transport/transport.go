@@ -20,6 +20,7 @@ func New(cfg *config.Config) *Server {
 	server := http.Server{
 		Addr:              ":8888",
 		ReadHeaderTimeout: 30 * time.Second,
+		WriteTimeout:      30 * time.Second,
 	}
 
 	return &Server{
@@ -44,7 +45,7 @@ func (s *Server) Start(ctx context.Context, handlers *handlers.Handlers) {
 
 func setupRoutes(handlers *handlers.Handlers) *mux.Router {
 	r := mux.NewRouter()
-	r.HandleFunc("/get_count/{pageID}", handlers.GetCountReq).Methods(http.MethodGet)
+	r.HandleFunc("/count/{pageID}", handlers.GetCountReq).Methods(http.MethodGet)
 	r.HandleFunc("/increment/{pageID}", handlers.IncrementReq).Methods(http.MethodPost)
 
 	return r
