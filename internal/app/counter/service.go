@@ -40,8 +40,6 @@ func (c *Counter) GetCount(pageID string) (int, error) {
 	if pageID == "" {
 		return 0, errors.New("pageID cannot be empty")
 	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
 	countOfPages, exists := c.counts[pageID]
 	if !exists {
 		return 0, errors.New("pageID not found")

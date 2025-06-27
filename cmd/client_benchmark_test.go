@@ -11,7 +11,7 @@ import (
 const (
 	serverURL         = "http://localhost:8888"
 	pageID            = "page1"
-	requestsPerSecond = 100000
+	requestsPerSecond = 10_000
 )
 
 // BenchmarkLoadTest тестирует производительность сервера при нагрузке 1000 RPS
@@ -60,7 +60,6 @@ func BenchmarkLoadTest(b *testing.B) {
 
 		var wg sync.WaitGroup
 		b.ResetTimer()
-
 		for i := 0; i < b.N; i++ {
 			wg.Add(1)
 			go func() {

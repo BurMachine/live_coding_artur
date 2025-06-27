@@ -11,10 +11,10 @@ import (
 
 type Handlers struct {
 	cfg     *config.Config
-	counter *counter.Counter
+	counter counter.PageViewCounter
 }
 
-func New(cfg *config.Config, counter *counter.Counter) *Handlers {
+func New(cfg *config.Config, counter counter.PageViewCounter) *Handlers {
 	return &Handlers{cfg: cfg, counter: counter}
 }
 
