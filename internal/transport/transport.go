@@ -1,13 +1,14 @@
 package transport
 
 import (
-	"awesomeProject/internal/config"
-	"awesomeProject/internal/transport/handlers"
 	"context"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"time"
+
+	"awesomeProject/internal/config"
+	"awesomeProject/internal/transport/handlers"
+	"github.com/gorilla/mux"
 )
 
 type Server struct {
@@ -43,8 +44,8 @@ func (s *Server) Start(ctx context.Context, handlers *handlers.Handlers) {
 
 func setupRoutes(handlers *handlers.Handlers) *mux.Router {
 	r := mux.NewRouter()
-	r.HandleFunc("/get_count", handlers.GetCountReq).Methods(http.MethodGet)
-	r.HandleFunc("/increment", handlers.IncrementReq).Methods(http.MethodPost)
+	r.HandleFunc("/get_count/{pageID}", handlers.GetCountReq).Methods(http.MethodGet)
+	r.HandleFunc("/increment/{pageID}", handlers.IncrementReq).Methods(http.MethodPost)
 
 	return r
 }
